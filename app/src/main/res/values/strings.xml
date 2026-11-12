@@ -123,7 +123,7 @@
     <string name="settings_tutorial">App tutorial</string>
     <string name="onb_title_1">Welcome to FD Player</string>
     <string name="onb_body_1">A music player built for your offline library, with a clean player, queue and playlists.</string>
-    <string name="onb_title_2">Library & sources</string>
+    <string name="onb_title_2">Library &amp; sources</string>
     <string name="onb_body_2">Browse songs on your device and add sources to search for new music.</string>
     <string name="onb_title_3">Downloads</string>
     <string name="onb_body_3">Paste a page link, pick the files you want, and download one or all with a queue.</string>
