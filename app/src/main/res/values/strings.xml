@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">اف دی پلیر</string>
+    <string name="app_brand">FD Player • MiladMedia</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_player">پخش</string>
+    <string name="tab_library">کتابخانه</string>
+    <string name="tab_downloads">دانلود</string>
+    <string name="tab_playlists">لیست‌ها</string>
+    <string name="tab_settings">تنظیمات</string>
+
+    <!-- Player Screen -->
+    <string name="now_playing">در حال پخش</string>
+    <string name="no_track_playing">هنوز آهنگی انتخاب نشده</string>
+    <string name="pick_from_library">از کتابخانه یه آهنگ انتخاب کن تا پخش شروع بشه</string>
+    <string name="unknown_artist">هنرمند ناشناس</string>
+    <string name="driving_mode">حالت رانندگی</string>
+    <string name="exit_driving_mode">خروج از حالت رانندگی</string>
+    <string name="mic_rhythm">ریتم از میکروفون</string>
+    <string name="more_options">گزینه‌های بیشتر</string>
+    <string name="shuffle">پخش تصادفی</string>
+    <string name="repeat_mode">حالت تکرار</string>
+    <string name="previous_track">آهنگ قبلی</string>
+    <string name="play_pause">پخش یا مکث</string>
+    <string name="next_track">آهنگ بعدی</string>
+
+    <!-- Mic Consent Dialog -->
+    <string name="mic_consent_title">واکنش لاوا‌لمپ به صدای محیط</string>
+    <string name="mic_consent_body">اگه اجازه بدی، اف دی پلیر فقط شدت صدای محیط رو از میکروفون می‌گیره تا حباب‌های پس‌زمینه با ریتم موسیقی برقصن. هیچ صدایی ذخیره یا ارسال نمی‌شه.</string>
+    <string name="allow_and_enable">اجازه می‌دم</string>
+    <string name="not_now">فعلاً نه</string>
+
+    <!-- Library Screen -->
+    <string name="search_tracks_hint">جست‌وجوی آهنگ یا خواننده...</string>
+    <string name="all_songs">همهٔ آهنگ‌ها</string>
+    <string name="albums">آلبوم‌ها</string>
+    <string name="artists">هنرمندان</string>
+    <string name="songs_count">%1$d آهنگ</string>
+    <string name="no_songs_found">آهنگی توی گوشی پیدا نشد</string>
+    <string name="grant_audio_permission">اجازه دسترسی به آهنگ‌ها</string>
+    <string name="permission_audio_desc">برای نشون دادن آهنگ‌های گوشی، باید اجازه دسترسی به فایل‌های صوتی رو بدی.</string>
+    <string name="add_to_playlist">افزودن به پلی‌لیست</string>
+    <string name="play_all">پخش همه</string>
+    <string name="refresh_library">به‌روزرسانی لیست</string>
+
+    <!-- Downloads Screen -->
+    <string name="downloads_title">دانلود از لینک وب</string>
+    <string name="paste_url_hint">لینک صفحه وب رو اینجا وارد کن...</string>
+    <string name="paste_clipboard">چسباندن</string>
+    <string name="extract_links">استخراج فایل‌ها</string>
+    <string name="extracting_links">در حال گشتن دنبال فایل‌های صوتی...</string>
+    <string name="download_all">دانلود همه (%1$d)</string>
+    <string name="download_single">دانلود</string>
+    <string name="downloaded_done">ذخیره شد</string>
+    <string name="downloading_now">در حال دانلود...</string>
+    <string name="download_failed">خطا در دانلود</string>
+    <string name="saved_folder_hint">فایل‌ها توی پوشه Downloads/FD Player ذخیره می‌شن</string>
+    <string name="no_audio_links_found">فایل صوتی قابل دانلودی توی این صفحه پیدا نشد</string>
+    <string name="invalid_url_msg">لطفاً یه لینک معتبر با http یا https وارد کن</string>
+
+    <!-- Playlists & Bluetooth Autoplay -->
+    <string name="playlists_title">پلی‌لیست‌ها</string>
+    <string name="new_playlist">پلی‌لیست جدید</string>
+    <string name="playlist_name_hint">مثلاً: آهنگ‌های جاده</string>
+    <string name="create">ساختن</string>
+    <string name="cancel">بی‌خیال</string>
+    <string name="delete">حذف</string>
+    <string name="save">ذخیره</string>
+    <string name="empty_playlist">این پلی‌لیست هنوز خالیه</string>
+    <string name="bt_autoplay_section">پخش خودکار با بلوتوث</string>
+    <string name="add_bt_rule">قانون جدید بلوتوث</string>
+    <string name="all_bluetooth_devices">همهٔ دستگاه‌های بلوتوث</string>
+    <string name="select_bt_device">انتخاب دستگاه بلوتوث</string>
+    <string name="time_range">بازهٔ زمانی</string>
+    <string name="start_time">شروع</string>
+    <string name="end_time">پایان</string>
+    <string name="target_playlist">پلی‌لیست هدف</string>
+    <string name="current_queue_fallback">پلی‌لیست جاری (پیش‌فرض)</string>
+    <string name="startup_delay_sec">تأخیر اضافه (ثانیه): %1$d</string>
+    <string name="shuffle_on_connect">پخش تصادفی موقع اتصال</string>
+    <string name="weekdays">روزهای هفته</string>
+    <string name="day_sat">ش</string>
+    <string name="day_sun">ی</string>
+    <string name="day_mon">د</string>
+    <string name="day_tue">س</string>
+    <string name="day_wed">چ</string>
+    <string name="day_thu">پ</string>
+    <string name="day_fri">ج</string>
+    <string name="bt_permission_needed">برای تشخیص اتصال بلوتوث، مجوز دستگاه‌های نزدیک لازمه</string>
+    <string name="grant_bt_permission">دادن مجوز بلوتوث</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">تنظیمات</string>
+    <string name="theme_section">ظاهر و تم برنامه</string>
+    <string name="theme_dark">تاریک</string>
+    <string name="theme_light">روشن</string>
+    <string name="theme_system">سیستم</string>
+    <string name="theme_custom">دلخواه</string>
+    <string name="custom_palette_title">انتخاب پالت رنگی دلخواه</string>
+    <string name="language_section">زبان برنامه</string>
+    <string name="lang_fa">فارسی</string>
+    <string name="lang_ar">العربية</string>
+    <string name="lang_en">English</string>
+    <string name="battery_tip_title">نکتهٔ مهم برای بلوتوث</string>
+    <string name="battery_tip_desc">برای اینکه پخش خودکار با بلوتوث همیشه بدون قطعی کار کنه، باتری برنامه رو توی تنظیمات گوشی روی «بدون محدودیت» بذار.</string>
+    <string name="open_battery_settings">تنظیمات باتری برنامه</string>
+    <string name="guide_button">راهنمای استفاده از برنامه</string>
+    <string name="guide_dialog_title">خوش اومدی به اف دی پلیر!</string>
+    <string name="guide_dialog_body">اف دی پلیر یه پخش‌کنندهٔ سبک و شیشه‌ایه که با سلیقهٔ خودت هماهنگ می‌شه:
+
+• توی صفحهٔ پخش، رنگ حباب‌های پس‌زمینه از کاور آهنگ ساخته می‌شه و با دکمهٔ فرمون می‌تونی بری حالت رانندگی.
+• توی بخش دانلود، لینک هر صفحهٔ وبی رو بدی فایل‌های صوتیش رو برات درمیاره و توی پوشهٔ FD Player ذخیره می‌کنه.
+• توی بخش لیست‌ها می‌تونی قانون بذاری که هر وقت به بلوتوث ماشین یا هندزفری وصل شدی، خودش آهنگ دلخواهت رو پخش کنه!</string>
+    <string name="got_it">فهمیدم</string>
+
+    <!-- First-time Section Tips -->
+    <string name="tip_player">اینجا صفحهٔ پخشه! از گوشهٔ بالا می‌تونی حالت رانندگی یا ریتم با میکروفون رو روشن کنی و زیر دکمه‌ها هم تنظیمات تکرار رو باز کنی.</string>
+    <string name="tip_library">همهٔ آهنگ‌های گوشیت اینجان. روی هر کدوم بزنی پخش می‌شه و از منوی کنارش می‌تونی به پلی‌لیست اضافه‌اش کنی.</string>
+    <string name="tip_downloads">لینک هر صفحهٔ وبی رو اینجا بچسبون تا همهٔ فایل‌های صوتیش رو پیدا کنه و تکی یا یکجا توی پوشهٔ Downloads/FD Player دانلود کنه.</string>
+    <string name="tip_playlists">اینجا پلی‌لیست‌های خودت رو بساز و قانون پخش خودکار بلوتوث تعریف کن تا موقع اتصال به ضبط ماشین، موسیقی خودکار شروع بشه.</string>
+    <string name="tip_settings">تم برنامه رو بین تاریک، روشن، سیستم یا ۸ رنگ دلخواه عوض کن و زبان برنامه رو تنظیم کن.</string>
+
+    <!-- Notifications -->
+    <string name="notif_bt_channel">سرویس پخش خودکار بلوتوث</string>
+    <string name="notif_bt_title">اف دی پلیر آمادهٔ اتصال بلوتوث</string>
+    <string name="notif_bt_text">با اتصال دستگاه بلوتوث طبق قوانین شما پخش شروع می‌شود</string>
+</resources>

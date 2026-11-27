@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FD Player</string>
+    <string name="app_brand">FD Player • MiladMedia</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_player">Player</string>
+    <string name="tab_library">Library</string>
+    <string name="tab_downloads">Downloads</string>
+    <string name="tab_playlists">Playlists</string>
+    <string name="tab_settings">Settings</string>
+
+    <!-- Player Screen -->
+    <string name="now_playing">Now Playing</string>
+    <string name="no_track_playing">Nothing playing yet</string>
+    <string name="pick_from_library">Pick a song from your library to get started</string>
+    <string name="unknown_artist">Unknown Artist</string>
+    <string name="driving_mode">Driving Mode</string>
+    <string name="exit_driving_mode">Exit Driving Mode</string>
+    <string name="mic_rhythm">Mic Rhythm</string>
+    <string name="more_options">More options</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="repeat_mode">Repeat</string>
+    <string name="previous_track">Previous</string>
+    <string name="play_pause">Play or Pause</string>
+    <string name="next_track">Next</string>
+
+    <!-- Mic Consent Dialog -->
+    <string name="mic_consent_title">React Lava Lamp to Ambient Beat</string>
+    <string name="mic_consent_body">If you allow this, FD Player only reads ambient volume levels from your mic so the background blobs dance to the beat. Nothing is ever recorded or sent anywhere.</string>
+    <string name="allow_and_enable">Allow &amp; Enable</string>
+    <string name="not_now">Not now</string>
+
+    <!-- Library Screen -->
+    <string name="search_tracks_hint">Search songs or artists...</string>
+    <string name="all_songs">All Songs</string>
+    <string name="albums">Albums</string>
+    <string name="artists">Artists</string>
+    <string name="songs_count">%1$d songs</string>
+    <string name="no_songs_found">No audio tracks found on your device</string>
+    <string name="grant_audio_permission">Grant Audio Permission</string>
+    <string name="permission_audio_desc">We need audio permission to load and play the music stored on your phone.</string>
+    <string name="add_to_playlist">Add to playlist</string>
+    <string name="play_all">Play all</string>
+    <string name="refresh_library">Refresh library</string>
+
+    <!-- Downloads Screen -->
+    <string name="downloads_title">Web Audio Downloader</string>
+    <string name="paste_url_hint">Paste a webpage URL here...</string>
+    <string name="paste_clipboard">Paste</string>
+    <string name="extract_links">Find Audio</string>
+    <string name="extracting_links">Scanning page for audio files...</string>
+    <string name="download_all">Download All (%1$d)</string>
+    <string name="download_single">Download</string>
+    <string name="downloaded_done">Saved</string>
+    <string name="downloading_now">Downloading...</string>
+    <string name="download_failed">Failed</string>
+    <string name="saved_folder_hint">Files are saved inside Downloads/FD Player</string>
+    <string name="no_audio_links_found">No downloadable audio files were found on this page</string>
+    <string name="invalid_url_msg">Please enter a valid http or https link</string>
+
+    <!-- Playlists & Bluetooth Autoplay -->
+    <string name="playlists_title">Playlists</string>
+    <string name="new_playlist">New Playlist</string>
+    <string name="playlist_name_hint">e.g. Road Trip Vibes</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="empty_playlist">This playlist is still empty</string>
+    <string name="bt_autoplay_section">Bluetooth Autoplay</string>
+    <string name="add_bt_rule">New Bluetooth Rule</string>
+    <string name="all_bluetooth_devices">All Bluetooth Devices</string>
+    <string name="select_bt_device">Select Bluetooth Device</string>
+    <string name="time_range">Time Range</string>
+    <string name="start_time">Start</string>
+    <string name="end_time">End</string>
+    <string name="target_playlist">Target Playlist</string>
+    <string name="current_queue_fallback">Current Queue (Default)</string>
+    <string name="startup_delay_sec">Extra Delay (sec): %1$d</string>
+    <string name="shuffle_on_connect">Shuffle on connect</string>
+    <string name="weekdays">Weekdays</string>
+    <string name="day_sat">Sat</string>
+    <string name="day_sun">Sun</string>
+    <string name="day_mon">Mon</string>
+    <string name="day_tue">Tue</string>
+    <string name="day_wed">Wed</string>
+    <string name="day_thu">Thu</string>
+    <string name="day_fri">Fri</string>
+    <string name="bt_permission_needed">Nearby devices permission is needed to detect Bluetooth connections</string>
+    <string name="grant_bt_permission">Grant Bluetooth Permission</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Settings</string>
+    <string name="theme_section">App Theme &amp; Colors</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_system">System</string>
+    <string name="theme_custom">Custom</string>
+    <string name="custom_palette_title">Pick a custom color palette</string>
+    <string name="language_section">App Language</string>
+    <string name="lang_fa">فارسی</string>
+    <string name="lang_ar">العربية</string>
+    <string name="lang_en">English</string>
+    <string name="battery_tip_title">Important Battery Tip</string>
+    <string name="battery_tip_desc">To keep Bluetooth autoplay reliable, set FD Player battery usage to Unrestricted in Android settings.</string>
+    <string name="open_battery_settings">Open App Battery Settings</string>
+    <string name="guide_button">How to Use FD Player</string>
+    <string name="guide_dialog_title">Welcome to FD Player!</string>
+    <string name="guide_dialog_body">FD Player is a lightweight glassmorphic player tailored to your style:
+
+• On the Player screen, background blobs adapt to your album art colors, and the steering wheel button switches to Driving Mode.
+• In Downloads, paste any webpage link to extract and save audio tracks into Downloads/FD Player.
+• In Playlists, create Bluetooth autoplay rules so your favorite music starts automatically in the car!</string>
+    <string name="got_it">Got it</string>
+
+    <!-- First-time Section Tips -->
+    <string name="tip_player">This is your Player! Toggle Driving Mode or Mic Rhythm from the top corners, and expand the bar below the controls for shuffle and repeat.</string>
+    <string name="tip_library">All your device tracks live here. Tap any song to play or use the menu to add it to a playlist.</string>
+    <string name="tip_downloads">Paste any webpage URL here to find downloadable audio links and save them into Downloads/FD Player.</string>
+    <string name="tip_playlists">Build your custom playlists and set up Bluetooth autoplay rules for hands-free listening.</string>
+    <string name="tip_settings">Switch between Dark, Light, System, or 8 Custom color palettes and change the app language anytime.</string>
+
+    <!-- Notifications -->
+    <string name="notif_bt_channel">Bluetooth Autoplay Service</string>
+    <string name="notif_bt_title">FD Player Bluetooth Monitor</string>
+    <string name="notif_bt_text">Ready to autoplay music when your Bluetooth device connects</string>
+</resources>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">إف دي بلاير</string>
+    <string name="app_brand">FD Player • MiladMedia</string>
+
+    <!-- Navigation Tabs -->
+    <string name="tab_player">المشغل</string>
+    <string name="tab_library">المكتبة</string>
+    <string name="tab_downloads">التنزيلات</string>
+    <string name="tab_playlists">القوائم</string>
+    <string name="tab_settings">الإعدادات</string>
+
+    <!-- Player Screen -->
+    <string name="now_playing">قيد التشغيل</string>
+    <string name="no_track_playing">ما في أغنية شغالة الحين</string>
+    <string name="pick_from_library">اختر أغنية من المكتبة عشان يبدأ التشغيل</string>
+    <string name="unknown_artist">فنان غير معروف</string>
+    <string name="driving_mode">وضع القيادة</string>
+    <string name="exit_driving_mode">الخروج من وضع القيادة</string>
+    <string name="mic_rhythm">إيقاع الميكروفون</string>
+    <string name="more_options">خيارات إضافية</string>
+    <string name="shuffle">تشغيل عشوائي</string>
+    <string name="repeat_mode">وضع التكرار</string>
+    <string name="previous_track">السابق</string>
+    <string name="play_pause">تشغيل أو إيقاف</string>
+    <string name="next_track">التالي</string>
+
+    <!-- Mic Consent Dialog -->
+    <string name="mic_consent_title">تفاعل الخلفية مع صوت الجو</string>
+    <string name="mic_consent_body">لو سمحت، التطبيق يقرأ فقط مستوى الصوت من الميكروفون عشان تتحرك فقاعات الخلفية مع الإيقاع. ما يتم تسجيل أو إرسال أي صوت أبدًا.</string>
+    <string name="allow_and_enable">موافق وتفعيل</string>
+    <string name="not_now">مو الحين</string>
+
+    <!-- Library Screen -->
+    <string name="search_tracks_hint">ابحث عن أغنية أو فنان...</string>
+    <string name="all_songs">كل الأغاني</string>
+    <string name="albums">الألبومات</string>
+    <string name="artists">الفنانون</string>
+    <string name="songs_count">%1$d أغنية</string>
+    <string name="no_songs_found">ما لقينا أغاني في جهازك</string>
+    <string name="grant_audio_permission">منح إذن الصوتيات</string>
+    <string name="permission_audio_desc">نحتاج إذن الوصول للملفات الصوتية عشان نعرض أغانيك.</string>
+    <string name="add_to_playlist">إضافة إلى قائمة تشغيل</string>
+    <string name="play_all">تشغيل الكل</string>
+    <string name="refresh_library">تحديث القائمة</string>
+
+    <!-- Downloads Screen -->
+    <string name="downloads_title">التنزيل من صفحات الويب</string>
+    <string name="paste_url_hint">الصق رابط صفحة الويب هنا...</string>
+    <string name="paste_clipboard">لصق</string>
+    <string name="extract_links">استخراج الملفات</string>
+    <string name="extracting_links">جاري البحث عن الملفات الصوتية...</string>
+    <string name="download_all">تنزيل الكل (%1$d)</string>
+    <string name="download_single">تنزيل</string>
+    <string name="downloaded_done">تم الحفظ</string>
+    <string name="downloading_now">جاري التنزيل...</string>
+    <string name="download_failed">فشل التنزيل</string>
+    <string name="saved_folder_hint">تنحفظ الملفات في مجلد Downloads/FD Player</string>
+    <string name="no_audio_links_found">ما لقينا ملفات صوتية قابلة للتنزيل في هذي الصفحة</string>
+    <string name="invalid_url_msg">يرجى إدخال رابط صحيح يبدأ بـ http أو https</string>
+
+    <!-- Playlists & Bluetooth Autoplay -->
+    <string name="playlists_title">قوائم التشغيل</string>
+    <string name="new_playlist">قائمة جديدة</string>
+    <string name="playlist_name_hint">مثال: أغاني الطريق</string>
+    <string name="create">إنشاء</string>
+    <string name="cancel">إلغاء</string>
+    <string name="delete">حذف</string>
+    <string name="save">حفظ</string>
+    <string name="empty_playlist">هذي القائمة لسه فاضية</string>
+    <string name="bt_autoplay_section">التشغيل التلقائي عبر البلوتوث</string>
+    <string name="add_bt_rule">قاعدة بلوتوث جديدة</string>
+    <string name="all_bluetooth_devices">كل أجهزة البلوتوث</string>
+    <string name="select_bt_device">اختر جهاز بلوتوث</string>
+    <string name="time_range">الفترة الزمنية</string>
+    <string name="start_time">البداية</string>
+    <string name="end_time">النهاية</string>
+    <string name="target_playlist">القائمة المطلوبة</string>
+    <string name="current_queue_fallback">القائمة الحالية (افتراضي)</string>
+    <string name="startup_delay_sec">تأخير إضافي (ثواني): %1$d</string>
+    <string name="shuffle_on_connect">تشغيل عشوائي عند الاتصال</string>
+    <string name="weekdays">أيام الأسبوع</string>
+    <string name="day_sat">س</string>
+    <string name="day_sun">ح</string>
+    <string name="day_mon">ن</string>
+    <string name="day_tue">ث</string>
+    <string name="day_wed">ر</string>
+    <string name="day_thu">خ</string>
+    <string name="day_fri">ج</string>
+    <string name="bt_permission_needed">نحتاج إذن الأجهزة القريبة لاكتشاف اتصال البلوتوث</string>
+    <string name="grant_bt_permission">منح إذن البلوتوث</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="theme_section">مظهر وألوان التطبيق</string>
+    <string name="theme_dark">داكن</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_system">النظام</string>
+    <string name="theme_custom">مخصص</string>
+    <string name="custom_palette_title">اختر لوحة ألوان مخصصة</string>
+    <string name="language_section">لغة التطبيق</string>
+    <string name="lang_fa">فارسی</string>
+    <string name="lang_ar">العربية</string>
+    <string name="lang_en">English</string>
+    <string name="battery_tip_title">ملاحظة مهمة للبلوتوث</string>
+    <string name="battery_tip_desc">عشان يشتغل التشغيل التلقائي عبر البلوتوث بدون انقطاع، خلّ بطارية التطبيق على «غير مقيد» في إعدادات الجهاز.</string>
+    <string name="open_battery_settings">إعدادات بطارية التطبيق</string>
+    <string name="guide_button">دليل استخدام التطبيق</string>
+    <string name="guide_dialog_title">أهلاً بك في إف دي بلاير!</string>
+    <string name="guide_dialog_body">إف دي بلاير مشغل موسيقى عصري بتصميم زجاجي يناسب ذوقك:
+
+• في شاشة المشغل، ألوان الخلفية تتفاعل مع غلاف الألبوم، وزر المقود يفعل وضع القيادة.
+• في التنزيلات، الصق رابط أي صفحة ويب لاستخراج وحفظ الملفات الصوتية في Downloads/FD Player.
+• في القوائم، أضف قواعد البلوتوث ليبدأ التشغيل تلقائيًا عند الاتصال بسيارتك!</string>
+    <string name="got_it">فهمت</string>
+
+    <!-- First-time Section Tips -->
+    <string name="tip_player">هذي شاشة المشغل! تقدر تفعل وضع القيادة أو إيقاع الميكروفون من الزوايا العلوية، وتفتح خيارات التكرار من الأسفل.</string>
+    <string name="tip_library">كل أغانيك محفوظة هنا. اضغط على أي أغنية للتشغيل أو أضفها لقائمة تشغيل.</string>
+    <string name="tip_downloads">الصق رابط أي صفحة ويب هنا لاستخراج الملفات الصوتية وتنزيلها في مجلد Downloads/FD Player.</string>
+    <string name="tip_playlists">أنشئ قوائمك الخاصة واضبط قواعد التشغيل التلقائي عبر البلوتوث.</string>
+    <string name="tip_settings">غيّر المظهر بين الداكن والفاتح والنظام أو 8 ألوان مخصصة، وحدد لغة التطبيق.</string>
+
+    <!-- Notifications -->
+    <string name="notif_bt_channel">خدمة التشغيل التلقائي عبر البلوتوث</string>
+    <string name="notif_bt_title">مراقب البلوتوث لإف دي بلاير</string>
+    <string name="notif_bt_text">جاهز لتشغيل الموسيقى تلقائيًا عند اتصال جهاز البلوتوث</string>
+</resources>

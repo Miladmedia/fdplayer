@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:pathData="M24,14 L84,14 A10,10 0 0,1 94,24 L94,84 A10,10 0 0,1 84,94 L24,94 A10,10 0 0,1 14,84 L14,24 A10,10 0 0,1 24,14 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:endX="94"
+                android:endY="94"
+                android:startX="14"
+                android:startY="14"
+                android:type="linear">
+                <item android:color="#FF0E1B3D" android:offset="0.0" />
+                <item android:color="#FF1E1348" android:offset="0.5" />
+                <item android:color="#FF092A45" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:pathData="M34,30 L74,54 L34,78 Z"
+        android:strokeWidth="6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:endX="74"
+                android:endY="78"
+                android:startX="34"
+                android:startY="30"
+                android:type="linear">
+                <item android:color="#FF29F2DF" android:offset="0.0" />
+                <item android:color="#FF7F5AF0" android:offset="0.5" />
+                <item android:color="#FFFF5E7E" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:fillColor="#FF29F2DF"
+        android:pathData="M74,74m-13,0a13,13 0,1 1,26 0a13,13 0,1 1,-26 0" />
+    <path
+        android:pathData="M74,66 L74,82 M74,66 L79,70 L70,77 M74,82 L79,78 L70,71"
+        android:strokeColor="#FF0D1326"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2.2" />
+</vector>
