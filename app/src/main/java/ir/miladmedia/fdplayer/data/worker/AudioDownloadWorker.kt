@@ -31,8 +31,7 @@ class AudioDownloadWorker @AssistedInject constructor(
         val itemId = inputData.getString(KEY_ID) ?: return Result.failure()
         val audioUrl = inputData.getString(KEY_URL) ?: return Result.failure()
         val rawFileName = inputData.getString(KEY_FILE_NAME) ?: "audio_${System.currentTimeMillis()}.mp3"
-        val safeFileName = rawFileName.replace(Regex("[^a-zA-Z0-9._\-\u0600-\u06FF ]"), "_")
-
+        val safeFileName = rawFileName.replace(Regex("[-a-zA-Z0-9._\\u0600-\\u06FF ]"), "_")
         downloadRepository.updateItemState(itemId, 0.02f, DownloadStatus.DOWNLOADING)
 
         return try {
