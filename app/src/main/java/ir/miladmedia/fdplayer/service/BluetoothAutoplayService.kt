@@ -18,6 +18,7 @@ import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +29,7 @@ import ir.miladmedia.fdplayer.domain.repository.BluetoothRuleRepository
 import ir.miladmedia.fdplayer.domain.repository.PlaybackController
 import ir.miladmedia.fdplayer.domain.repository.PlaylistRepository
 import ir.miladmedia.fdplayer.domain.usecase.MatchBluetoothRuleUseCase
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -47,7 +49,12 @@ class BluetoothAutoplayService : Service() {
     @Inject lateinit var playbackController: PlaybackController
     @Inject lateinit var matchBluetoothRuleUseCase: MatchBluetoothRuleUseCase
 
-    private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        Log.e(TAG, "Unhandled error in BluetoothAutoplayService scope", throwable)
+        isAutoplayInProgress.set(false)
+    }
+
+    private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate + exceptionHandler)
     private val isAutoplayInProgress = AtomicBoolean(false)
     private var lastHandledAddress: String? = null
     private var lastHandledTimestampMs: Long = 0L
@@ -56,49 +63,53 @@ class BluetoothAutoplayService : Service() {
 
     private val btReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            if (!hasBluetoothConnectPermission(context)) {
-                stopSelf()
-                return
-            }
-
-            when (intent.action) {
-                BluetoothDevice.ACTION_ACL_CONNECTED -> {
-                    val device: BluetoothDevice? = extractBluetoothDevice(intent)
-                    device?.let { onDeviceConnected(it) }
+            try {
+                if (!hasBluetoothConnectPermission(context)) {
+                    stopSelf()
+                    return
                 }
 
-                BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED -> {
-                    val state = intent.getIntExtra(
-                        BluetoothProfile.EXTRA_STATE,
-                        BluetoothProfile.STATE_DISCONNECTED
-                    )
-                    val device: BluetoothDevice? = extractBluetoothDevice(intent)
-                    if (state == BluetoothProfile.STATE_CONNECTED && device != null) {
-                        onDeviceConnected(device)
-                    } else if (state == BluetoothProfile.STATE_DISCONNECTED &&
-                        device?.address == lastHandledAddress
-                    ) {
-                        lastHandledAddress = null
+                when (intent.action) {
+                    BluetoothDevice.ACTION_ACL_CONNECTED -> {
+                        val device: BluetoothDevice? = extractBluetoothDevice(intent)
+                        device?.let { onDeviceConnected(it) }
+                    }
+
+                    BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED -> {
+                        val state = intent.getIntExtra(
+                            BluetoothProfile.EXTRA_STATE,
+                            BluetoothProfile.STATE_DISCONNECTED
+                        )
+                        val device: BluetoothDevice? = extractBluetoothDevice(intent)
+                        if (state == BluetoothProfile.STATE_CONNECTED && device != null) {
+                            onDeviceConnected(device)
+                        } else if (state == BluetoothProfile.STATE_DISCONNECTED &&
+                            device?.address == lastHandledAddress
+                        ) {
+                            lastHandledAddress = null
+                        }
+                    }
+
+                    BluetoothDevice.ACTION_ACL_DISCONNECTED -> {
+                        val device: BluetoothDevice? = extractBluetoothDevice(intent)
+                        if (device?.address == lastHandledAddress) {
+                            lastHandledAddress = null
+                        }
+                    }
+
+                    BluetoothAdapter.ACTION_STATE_CHANGED -> {
+                        val adapterState = intent.getIntExtra(
+                            BluetoothAdapter.EXTRA_STATE,
+                            BluetoothAdapter.ERROR
+                        )
+                        if (adapterState == BluetoothAdapter.STATE_OFF) {
+                            lastHandledAddress = null
+                            isAutoplayInProgress.set(false)
+                        }
                     }
                 }
-
-                BluetoothDevice.ACTION_ACL_DISCONNECTED -> {
-                    val device: BluetoothDevice? = extractBluetoothDevice(intent)
-                    if (device?.address == lastHandledAddress) {
-                        lastHandledAddress = null
-                    }
-                }
-
-                BluetoothAdapter.ACTION_STATE_CHANGED -> {
-                    val adapterState = intent.getIntExtra(
-                        BluetoothAdapter.EXTRA_STATE,
-                        BluetoothAdapter.ERROR
-                    )
-                    if (adapterState == BluetoothAdapter.STATE_OFF) {
-                        lastHandledAddress = null
-                        isAutoplayInProgress.set(false)
-                    }
-                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error inside Bluetooth broadcast receiver", e)
             }
         }
     }
@@ -110,31 +121,29 @@ class BluetoothAutoplayService : Service() {
             return
         }
 
-        createNotificationChannel()
-        val notification = buildForegroundNotification()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            startForeground(
-                NOTIFICATION_ID,
-                notification,
-                ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE
-            )
-        } else {
-            startForeground(NOTIFICATION_ID, notification)
+        if (!promoteToForegroundSafely()) {
+            stopSelf()
+            return
         }
 
-        val filter = IntentFilter().apply {
-            addAction(BluetoothDevice.ACTION_ACL_CONNECTED)
-            addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED)
-            addAction(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED)
-            addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
+        try {
+            val filter = IntentFilter().apply {
+                addAction(BluetoothDevice.ACTION_ACL_CONNECTED)
+                addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED)
+                addAction(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED)
+                addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
+            }
+            ContextCompat.registerReceiver(
+                this,
+                btReceiver,
+                filter,
+                ContextCompat.RECEIVER_EXPORTED
+            )
+            receiverRegistered = true
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to register Bluetooth receiver", e)
+            stopSelf()
         }
-        ContextCompat.registerReceiver(
-            this,
-            btReceiver,
-            filter,
-            ContextCompat.RECEIVER_EXPORTED
-        )
-        receiverRegistered = true
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -142,7 +151,31 @@ class BluetoothAutoplayService : Service() {
             stopSelf()
             return START_NOT_STICKY
         }
+        if (!promoteToForegroundSafely()) {
+            stopSelf()
+            return START_NOT_STICKY
+        }
         return START_STICKY
+    }
+
+    private fun promoteToForegroundSafely(): Boolean {
+        return try {
+            createNotificationChannel()
+            val notification = buildForegroundNotification()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                startForeground(
+                    NOTIFICATION_ID,
+                    notification,
+                    ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE
+                )
+            } else {
+                startForeground(NOTIFICATION_ID, notification)
+            }
+            true
+        } catch (e: Exception) {
+            Log.e(TAG, "Unable to promote BluetoothAutoplayService to foreground", e)
+            false
+        }
     }
 
     private fun onDeviceConnected(device: BluetoothDevice) {
@@ -154,7 +187,6 @@ class BluetoothAutoplayService : Service() {
         }
 
         val now = System.currentTimeMillis()
-        // Ignore duplicate ACL + A2DP connection events for the same device while in progress or within cooldown
         if (isAutoplayInProgress.get() && address == lastHandledAddress) {
             return
         }
@@ -172,7 +204,6 @@ class BluetoothAutoplayService : Service() {
                 val activeRules = bluetoothRuleRepository.getActiveRules()
                 val matchedRule = matchBluetoothRuleUseCase(activeRules, address)
 
-                // Base 2.5s stabilization delay + optional rule latencySec
                 val extraDelayMs = (matchedRule?.latencySec ?: 0).coerceAtLeast(0) * 1000L
                 delay(BASE_STABILIZATION_DELAY_MS + extraDelayMs)
 
@@ -195,15 +226,15 @@ class BluetoothAutoplayService : Service() {
                             return@launch
                         }
                     }
-                    // Matched rule uses current queue or playlist had no tracks -> fallback to current queue
                     if (matchedRule.shuffle) {
                         playbackController.toggleShuffle()
                     }
                     resumeOrFallbackToLibrary()
                 } else {
-                    // No rule matched -> play current playlist/queue
                     resumeOrFallbackToLibrary()
                 }
+            } catch (e: Exception) {
+                Log.e(TAG, "Autoplay execution failed", e)
             } finally {
                 isAutoplayInProgress.set(false)
             }
@@ -232,7 +263,7 @@ class BluetoothAutoplayService : Service() {
     }
 
     private fun createNotificationChannel() {
-        val manager = getSystemService(NotificationManager::class.java)
+        val manager = getSystemService(NotificationManager::class.java) ?: return
         val channel = NotificationChannel(
             CHANNEL_ID,
             getString(R.string.notif_bt_channel),
@@ -276,6 +307,7 @@ class BluetoothAutoplayService : Service() {
     }
 
     companion object {
+        private const val TAG = "BT_AUTO"
         private const val CHANNEL_ID = "fd_bluetooth_autoplay_channel"
         private const val NOTIFICATION_ID = 2042
         private const val BASE_STABILIZATION_DELAY_MS = 2500L
@@ -297,7 +329,8 @@ class BluetoothAutoplayService : Service() {
             try {
                 val intent = Intent(context, BluetoothAutoplayService::class.java)
                 ContextCompat.startForegroundService(context, intent)
-            } catch (_: Exception) {
+            } catch (e: Exception) {
+                Log.w(TAG, "Skipped starting BluetoothAutoplayService: ${e.message}")
             }
         }
     }

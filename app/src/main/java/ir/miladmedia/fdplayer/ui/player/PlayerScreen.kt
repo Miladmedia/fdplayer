@@ -302,7 +302,7 @@ fun PlayerScreen(
                     contentPadding = 16.dp,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(0.55f, fill = true)
+                        .height(220.dp)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxSize(),

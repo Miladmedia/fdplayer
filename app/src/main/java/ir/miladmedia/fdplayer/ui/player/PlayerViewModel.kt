@@ -21,7 +21,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
@@ -52,8 +52,26 @@ class PlayerViewModel @Inject constructor(
     private val _showMicConsentDialog = MutableStateFlow(false)
     private val _showFirstTimeTip = MutableStateFlow(!tipsPreferences.isTipDismissed("player"))
 
-    private val _uiState = MutableStateFlow(PlayerUiState())
-    val uiState: StateFlow<PlayerUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<PlayerUiState> = combine(
+        playbackController.playbackState,
+        settingsRepository.observePreferences(),
+        _isDrivingMode,
+        _showMicConsentDialog,
+        _showFirstTimeTip
+    ) { playback, prefs, driving, micDialog, tip ->
+        PlayerUiState(
+            playback = playback,
+            isDrivingMode = driving,
+            micRhythmConsentGranted = prefs.micRhythmConsentGranted,
+            micRhythmEnabled = prefs.micRhythmEnabled,
+            showMicConsentDialog = micDialog,
+            showFirstTimeTip = tip
+        )
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = PlayerUiState()
+    )
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val micAmplitude: StateFlow<Float> = settingsRepository.observePreferences()
@@ -70,36 +88,6 @@ class PlayerViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            playbackController.playbackState.collect { playback ->
-                _uiState.value = _uiState.value.copy(playback = playback)
-            }
-        }
-        viewModelScope.launch {
-            settingsRepository.observePreferences().collect { prefs ->
-                _uiState.value = _uiState.value.copy(
-                    micRhythmConsentGranted = prefs.micRhythmConsentGranted,
-                    micRhythmEnabled = prefs.micRhythmEnabled
-                )
-            }
-        }
-        viewModelScope.launch {
-            _isDrivingMode.collect { driving ->
-                _uiState.value = _uiState.value.copy(isDrivingMode = driving)
-            }
-        }
-        viewModelScope.launch {
-            _showMicConsentDialog.collect { show ->
-                _uiState.value = _uiState.value.copy(showMicConsentDialog = show)
-            }
-        }
-        viewModelScope.launch {
-            _showFirstTimeTip.collect { show ->
-                _uiState.value = _uiState.value.copy(showFirstTimeTip = show)
-            }
-        }
-
-        // Extract dominant colors whenever currentTrack changes
-        viewModelScope.launch {
             playbackController.playbackState
                 .map { it.currentTrack?.albumArtUri }
                 .distinctUntilChanged()
@@ -115,7 +103,7 @@ class PlayerViewModel @Inject constructor(
     }
 
     fun onMicButtonClicked(hasRecordPermission: Boolean, onRequestPermission: () -> Unit) {
-        val state = _uiState.value
+        val state = uiState.value
         if (state.micRhythmEnabled) {
             viewModelScope.launch {
                 settingsRepository.setMicRhythmEnabled(false)
